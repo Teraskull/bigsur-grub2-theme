@@ -1,0 +1,68 @@
+{
+    "theme": {
+        "file": "/ventoy/themes/bigsur/theme.txt",
+        "gfxmode": "1920x1080",
+        "display_mode": "GUI",
+        "serial_param": "--unit=0 --speed=9600",
+        "ventoy_left": "5%",
+        "ventoy_top": "95%",
+        "ventoy_color": "#eff0f1",
+        "fonts": [
+            "/ventoy/themes/bigsur/terminus-12.pf2",
+            "/ventoy/themes/bigsur/terminus-14.pf2",
+            "/ventoy/themes/bigsur/terminus-16.pf2",
+            "/ventoy/themes/bigsur/DejaVuSans-48.pf2",
+            "/ventoy/themes/bigsur/DejaVuSans-Regular-14.pf2"
+        ]
+    },
+    "menu_class": [
+        {
+            "key": "kubuntu",
+            "class": "kubuntu"
+        },
+        {
+            "key": "ubuntu",
+            "class": "ubuntu"
+        },
+        {
+            "key": "pop-os",
+            "class": "pop-os"
+        },
+        {
+            "key": "arch",
+            "class": "arch"
+        },
+        {
+            "key": "linuxmint",
+            "class": "linuxmint"
+        },
+        {
+            "key": "opensuse",
+            "class": "opensuse"
+        },
+        {
+            "key": "elementary",
+            "class": "elementary"
+        },
+        {
+            "key": "manjaro",
+            "class": "manjaro"
+        },
+        {
+            "key": "debian",
+            "class": "debian"
+        },
+        {
+            "key": "deepin",
+            "class": "deepin"
+        },
+        {
+            "key": "windows",
+            "class": "windows"
+        },
+        {
+            "key": "hirens",
+            "class": "windows"
+        }
+    ]
+}

@@ -1,0 +1,108 @@
+# GRUB2 gfxmenu Linux theme
+# BigSur theme
+# Designed for 1920x1080 resolution
+
+desktop-image: "background.png"
+
+title-text: ""
+message-font: "DejaVu Sans Regular 14"
+message-color: "#eff0f1"
+terminal-font: "Terminus Regular 14"
+terminal-box: "terminal_*.png"
+
++ label {
+    text = "Ventoy"
+    font = "DejaVu Sans Regular 48"
+    color = "#eff0f1"
+    left = 50%-200
+    top = 15%
+    height = 20
+    width = 400
+    align = "center"
+}
+
++ label {
+    text = "Select an OS"
+    font = "DejaVu Sans Regular 16"
+    color = "#eff0f1"
+    top = 30%-30
+    left = 50%-80
+    align = "center"
+    width = 160
+    height = 40
+}
+
++ boot_menu {
+    left = 20%
+    width = 60%
+    top = 30%
+    height = 40%
+    icon_width = 32
+    icon_height = 32
+    item_height = 30
+    item_padding = 1
+    item_icon_space = 5
+    item_spacing = 35
+    menu_pixmap_style = "boot_menu_*.png"
+    item_font = "DejaVu Sans Regular 16"
+    item_color = "#757575"
+    item_pixmap_style = "item_*.png"
+    selected_item_color = "#ffffff"
+    selected_item_pixmap_style = "select_*.png"
+    scrollbar = true
+    scrollbar_width = 21
+    scrollbar_thumb = "slider_*.png"
+}
+
++ progress_bar {
+    left = 50%-300
+    top = 95%-30
+    height = 20
+    width = 600
+    color = "#757575"
+    font = "Terminus Regular 16"
+    align = "center"
+    id = "__timeout__"
+    text = "@TIMEOUT_NOTIFICATION_LONG@"
+    text_color = "#efefef"
+    bar_style = "*"
+    highlight_style = "*"
+}
+
++ hbox {
+    left = 75%
+    top = 95%
+    width = 10%
+    height = 25
+    + label {
+        text = "@KEYMAP_SHORT@"
+        color = "#eff0f1"
+        align = "center"
+    }
+}
+
+
+# Ventoy Hotkey Tips
++ hbox {
+    left = 35%-50
+    top = 95%
+    width = 10%
+    height = 25
+    + label {
+        text = "@VTOY_HOTKEY_TIP@"
+        color = "#eff0f1"
+        align = "center"
+    }
+}
+
++ hbox {
+    left = 90%
+    top = 5
+    width = 10%
+    height = 25
+    + label {
+        text = "@VTOY_MEM_DISK@"
+        color = "#eff0f1"
+        align = "left"
+    }
+}
