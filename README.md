@@ -18,6 +18,8 @@
 
 ## Usage:
 
+##### Grub2:
+
 ```bash
 $ git clone https://github.com/Teraskull/bigsur-grub2-theme
 
@@ -25,6 +27,9 @@ $ cd bigsur-grub2-theme
 
 $ sudo ./install.sh
 ```
+##### Ventoy:
+
+* Copy the `ventoy` folder to the exFAT partition on your Ventoy USB drive, as explained [here](https://github.com/ventoy/Ventoy/issues/110).
 
 
 ## License:
