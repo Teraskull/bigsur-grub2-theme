@@ -9,7 +9,9 @@
 <div align="center">
 
 
-<!-- ![Main window screenshot](screenshots/bigsur.png) -->
+![Mockup image](screenshots/bigsur_mockup.png)
+
+![Bootloader image](screenshots/bigsur.png)
 
 </div>
 
