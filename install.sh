@@ -1,8 +1,12 @@
 #!/bin/bash
 
-ROOT_UID=0
-THEME_DIR="/usr/share/grub/themes"
-THEME_NAME="bigsur"
+THEME='bigsur'
+
+# Pre-authorise sudo
+sudo echo
+# Detect distro and set GRUB location and update method
+GRUB_DIR='grub'
+UPDATE_GRUB=''
 
 
 # Colors
@@ -45,85 +49,89 @@ prompt -s "\t             Grub theme by Teraskull"
 echo ""
 
 
-# Check command availability
-function has_command() {
-    command -v $1 > /dev/null
-}
-
-
 # Wait before installing
 total=10
 count=0
 while [ ${count} -lt ${total} ]; do
     tlimit=$(( $total - $count ))
-    prompt -i "\rPress Enter to install ${b_CWAR}${THEME_NAME}${b_CCIN} theme (automatically install in ${b_CWAR}${tlimit}${b_CCIN}s): \c"
+    prompt -i "\rPress Enter to install ${b_CWAR}${THEME}${b_CCIN} theme (automatically install in ${b_CWAR}${tlimit}${b_CCIN}s): \c"
     read -n 1 -s -t 1 && { break ; }
     count=$((count+1))
 done
 
 
-# Check for root access
-prompt -w "\n\nChecking for root access..."
-if [ "$UID" -eq "$ROOT_UID" ]; then
-    # Create themes directory if does not exist
-    prompt -i "\nChecking if ${b_CWAR}${THEME_DIR}${b_CCIN} exists..."
-    [[ -d ${THEME_DIR}/${THEME_NAME} ]] && rm -rf ${THEME_DIR}/${THEME_NAME}
-    mkdir -p "${THEME_DIR}/${THEME_NAME}"
+if [ -e /etc/os-release ]; then
 
-    prompt -i "\nChecking if ${b_CWAR}${THEME_NAME}${b_CCIN} theme exists..."
-    if [ -d ${THEME_NAME} ]; then
-        prompt -i "\nInstalling ${b_CWAR}${THEME_NAME}${b_CCIN} theme..."
+    source /etc/os-release
 
-        # Copy theme
-        cp -a ${THEME_NAME}/* ${THEME_DIR}/${THEME_NAME}
+    if [[ "$ID" =~ (debian|ubuntu|solus) || \
+          "$ID_LIKE" =~ (debian|ubuntu) ]]; then
 
-        # Backup Grub config
-        prompt -i "\nBacking up Grub config (${b_CWAR}/etc/default/grub.bak${b_CCIN})..."
-        cp -an /etc/default/grub /etc/default/grub.bak
+        UPDATE_GRUB='update-grub'
 
-        # Set theme
-        prompt -i "\nSetting ${b_CWAR}${THEME_NAME}${b_CCIN} theme as default..."
+    elif [[ "$ID" =~ (arch|manjaro|gentoo) || \
+            "$ID_LIKE" =~ (archlinux|manjaro|gentoo) ]]; then
 
-        grep "GRUB_THEME=" /etc/default/grub 2>&1 >/dev/null && sed -i '/GRUB_THEME=/d' /etc/default/grub
+        UPDATE_GRUB='grub-mkconfig -o /boot/grub/grub.cfg'
 
-        echo "GRUB_THEME=\"${THEME_DIR}/${THEME_NAME}/theme.txt\"" >> /etc/default/grub
+    elif [[ "$ID" =~ (centos|fedora|opensuse) || \
+            "$ID_LIKE" =~ (fedora|rhel|suse) ]]; then
 
+        GRUB_CFG_PATH='/boot/grub2/grub.cfg'
 
-        # Update Grub config
-        prompt -i "\nUpdating Grub config..."
-        if has_command update-grub; then
-            update-grub
-        elif has_command grub-mkconfig; then
-            grub-mkconfig -o /boot/grub/grub.cfg
-        elif has_command grub2-mkconfig; then
-            if has_command zypper; then
-            grub2-mkconfig -o /boot/grub2/grub.cfg
-            elif has_command dnf; then
-            grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
-            fi
-        else
-            prompt -e "\nError: Cannot update Grub Config. Theme not installed.\n"
+        if [ -d /boot/efi/EFI/${ID} ]
+        then
+            GRUB_CFG_PATH="/boot/efi/EFI/${ID}/grub.cfg"
         fi
 
-        if [ $? -eq 0 ]; then
-            # Success message
-            echo ""
-            prompt -s "\t          ****************************"
-            prompt -s "\t          *  Successfully installed  *"
-            prompt -s "\t          ****************************"
-            echo ""
-        else
-            # Error if could not update Grub config
-            prompt -e "\nError: Cannot update Grub Config. Theme not installed.\n"
+        # BLS etries have 'kernel' class, copy corresponding icon
+        if [[ -d /boot/loader/entries && -e icons/${ID}.png ]]
+        then
+            cp icons/${ID}.png icons/kernel.png
         fi
 
-    else
-        # Error if theme folder does not exist on the same level as install.sh
-        prompt -e "\nError: Directory ${THEME_NAME} does not exist.\n"
+        GRUB_DIR='grub2'
+        UPDATE_GRUB="grub2-mkconfig -o ${GRUB_CFG_PATH}"
     fi
+fi
 
+prompt -i "\n\nCreating GRUB themes directory"
+sudo mkdir -p /boot/${GRUB_DIR}/themes/${THEME}
+
+prompt -i "\nCopying ${b_CWAR}${THEME}${b_CCIN} theme to GRUB themes directory"
+sudo cp -r * /boot/${GRUB_DIR}/themes/${THEME}
+
+prompt -i "\nRemoving other themes from GRUB config"
+sudo sed -i '/^GRUB_THEME=/d' /etc/default/grub
+
+prompt -i "\nMaking sure GRUB uses graphical output"
+sudo sed -i 's/^\(GRUB_TERMINAL\w*=.*\)/#\1/' /etc/default/grub
+
+prompt -i "\nRemoving empty lines at the end of GRUB config" # optional
+sudo sed -i -e :a -e '/^\n*$/{$d;N;};/\n$/ba' /etc/default/grub
+
+prompt -i "\nAdding new line to GRUB config just in case" # optional
+echo | sudo tee -a /etc/default/grub
+
+prompt -i "\nAdding ${b_CWAR}${THEME}${b_CCIN} theme to GRUB config"
+echo "GRUB_THEME=/boot/${GRUB_DIR}/themes/${THEME}/theme.txt" | sudo tee -a /etc/default/grub
+
+prompt -i "\nUpdating GRUB"
+if [[ $UPDATE_GRUB ]]; then
+    eval sudo "$UPDATE_GRUB"
+
+    echo ""
+    prompt -s "\t          ****************************"
+    prompt -s "\t          *  Successfully installed  *"
+    prompt -s "\t          ****************************"
 
 else
-    # Error if script was not run as root
-    prompt -e "\nError: Please run script as root.\n"
+    prompt -e   ---------------------------------------------------------------------------------------
+    prompt -e    Cannot detect your distro, you will need to run \`grub-mkconfig\` as root manually.
+    prompt -e
+    prompt -e    Common ways:
+    prompt -e    "- Debian, Ubuntu, Solus and derivatives: \`update-grub\` or \`grub-mkconfig -o /boot/grub/grub.cfg\`"
+    prompt -e    "- RHEL, CentOS, Fedora, SUSE and derivatives: \`grub2-mkconfig -o /boot/grub2/grub.cfg\`"
+    prompt -e    "- Arch, Gentoo and derivatives: \`grub-mkconfig -o /boot/grub/grub.cfg\`"
+    prompt -e    ---------------------------------------------------------------------------------------
 fi
