@@ -25,7 +25,7 @@ $ git clone https://github.com/Teraskull/bigsur-grub2-theme
 
 $ cd bigsur-grub2-theme
 
-$ sudo ./install.sh
+$ ./install.sh
 ```
 ##### Ventoy:
 
