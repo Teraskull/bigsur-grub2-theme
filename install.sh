@@ -95,11 +95,14 @@ if [ -e /etc/os-release ]; then
     fi
 fi
 
-prompt -i "\n\nCreating GRUB themes directory"
+prompt -i "\n\nRemoving previous version of ${b_CWAR}${THEME}${b_CCIN} GRUB theme if exists"
+sudo rm -r /boot/${GRUB_DIR}/themes/${THEME}
+
+prompt -i "\nCreating GRUB themes directory"
 sudo mkdir -p /boot/${GRUB_DIR}/themes/${THEME}
 
 prompt -i "\nCopying ${b_CWAR}${THEME}${b_CCIN} theme to GRUB themes directory"
-sudo cp -r * /boot/${GRUB_DIR}/themes/${THEME}
+sudo cp -r ${THEME}/* /boot/${GRUB_DIR}/themes/${THEME}
 
 prompt -i "\nRemoving other themes from GRUB config"
 sudo sed -i '/^GRUB_THEME=/d' /etc/default/grub
@@ -114,7 +117,7 @@ prompt -i "\nAdding new line to GRUB config just in case" # optional
 echo | sudo tee -a /etc/default/grub
 
 prompt -i "\nAdding ${b_CWAR}${THEME}${b_CCIN} theme to GRUB config"
-echo "GRUB_THEME=/boot/${GRUB_DIR}/themes/${THEME}/theme.txt" | sudo tee -a /etc/default/grub
+echo "GRUB_THEME=\"/boot/${GRUB_DIR}/themes/${THEME}/theme.txt\"" | sudo tee -a /etc/default/grub
 
 prompt -i "\nUpdating GRUB"
 if [[ $UPDATE_GRUB ]]; then
