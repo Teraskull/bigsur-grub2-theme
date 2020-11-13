@@ -40,6 +40,10 @@ prompt() {
 }
 
 
+# Check if theme directory exists before proceeding with installation
+[ ! -d ${THEME} ] && prompt -e "\nError: Directory ${b_CWAR}${THEME}${b_CRER} does not exist.\n" && exit 1
+
+
 # Welcome message
 echo ""
 prompt -s "\t          *****************************"
@@ -95,25 +99,25 @@ if [ -e /etc/os-release ]; then
     fi
 fi
 
-prompt -i "\n\nRemoving previous version of ${b_CWAR}${THEME}${b_CCIN} GRUB theme if exists"
+prompt -i "\n\nRemoving previous version of ${b_CWAR}${THEME}${b_CCIN} theme if exists"
 sudo rm -r /boot/${GRUB_DIR}/themes/${THEME}
 
-prompt -i "\nCreating GRUB themes directory"
+prompt -i "\nCreating ${b_CWAR}${THEME}${b_CCIN} theme directory under /boot/${GRUB_DIR}/themes/"
 sudo mkdir -p /boot/${GRUB_DIR}/themes/${THEME}
 
-prompt -i "\nCopying ${b_CWAR}${THEME}${b_CCIN} theme to GRUB themes directory"
+prompt -i "\nCopying ${b_CWAR}${THEME}${b_CCIN} theme to previously created directory"
 sudo cp -r ${THEME}/* /boot/${GRUB_DIR}/themes/${THEME}
 
 prompt -i "\nRemoving other themes from GRUB config"
 sudo sed -i '/^GRUB_THEME=/d' /etc/default/grub
 
-prompt -i "\nMaking sure GRUB uses graphical output"
+prompt -i "\nEnsuring that GRUB uses graphical output"
 sudo sed -i 's/^\(GRUB_TERMINAL\w*=.*\)/#\1/' /etc/default/grub
 
-prompt -i "\nRemoving empty lines at the end of GRUB config" # optional
+prompt -i "\nRemoving empty lines at the end of GRUB config"  # optional
 sudo sed -i -e :a -e '/^\n*$/{$d;N;};/\n$/ba' /etc/default/grub
 
-prompt -i "\nAdding new line to GRUB config just in case" # optional
+prompt -i "\nAdding new line to GRUB config"  # optional
 echo | sudo tee -a /etc/default/grub
 
 prompt -i "\nAdding ${b_CWAR}${THEME}${b_CCIN} theme to GRUB config"
