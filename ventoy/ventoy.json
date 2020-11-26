@@ -57,6 +57,10 @@
             "class": "deepin"
         },
         {
+            "key": "solus",
+            "class": "solus"
+        },
+        {
             "key": "windows",
             "class": "windows"
         },
