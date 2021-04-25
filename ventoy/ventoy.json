@@ -61,6 +61,10 @@
             "class": "solus"
         },
         {
+            "key": "zorin-os",
+            "class": "zorin-os"
+        },
+        {
             "key": "windows",
             "class": "windows"
         },
