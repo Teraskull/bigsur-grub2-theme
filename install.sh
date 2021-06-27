@@ -117,8 +117,8 @@ sudo sed -i 's/^\(GRUB_TERMINAL\w*=.*\)/#\1/' /etc/default/grub
 prompt -i "\nRemoving empty lines at the end of GRUB config"  # optional
 sudo sed -i -e :a -e '/^\n*$/{$d;N;};/\n$/ba' /etc/default/grub
 
-prompt -i "\nAdding new line to GRUB config"  # optional
-echo | sudo tee -a /etc/default/grub
+# prompt -i "\nAdding new line to GRUB config"  # optional
+# echo | sudo tee -a /etc/default/grub
 
 prompt -i "\nAdding ${b_CWAR}${THEME}${b_CCIN} theme to GRUB config"
 echo "GRUB_THEME=\"/boot/${GRUB_DIR}/themes/${THEME}/theme.txt\"" | sudo tee -a /etc/default/grub
