@@ -73,6 +73,10 @@
             "class": "windows"
         },
         {
+            "key": "memtest",
+            "class": "memtest"
+        },
+        {
             "key": "iso",
             "class": "iso"
         }
