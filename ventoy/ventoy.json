@@ -65,6 +65,114 @@
             "class": "zorin-os"
         },
         {
+            "key": "antergos",
+            "class": "antergos"
+        },
+        {
+            "key": "archlinux",
+            "class": "archlinux"
+        },
+        {
+            "key": "arcolinux",
+            "class": "arcolinux"
+        },
+        {
+            "key": "chakra",
+            "class": "chakra"
+        },
+        {
+            "key": "crunchbang",
+            "class": "crunchbang"
+        },
+        {
+            "key": "devuan",
+            "class": "devuan"
+        },
+        {
+            "key": "edubuntu",
+            "class": "edubuntu"
+        },
+        {
+            "key": "endeavouros",
+            "class": "endeavouros"
+        },
+        {
+            "key": "fedora",
+            "class": "fedora"
+        },
+        {
+            "key": "frugalware",
+            "class": "frugalware"
+        },
+        {
+            "key": "gentoo",
+            "class": "gentoo"
+        },
+        {
+            "key": "gnu-linux",
+            "class": "gnu-linux"
+        },
+        {
+            "key": "kali",
+            "class": "kali"
+        },
+        {
+            "key": "kaos",
+            "class": "kaos"
+        },
+        {
+            "key": "korora",
+            "class": "korora"
+        },
+        {
+            "key": "lubuntu",
+            "class": "lubuntu"
+        },
+        {
+            "key": "macosx",
+            "class": "macosx"
+        },
+        {
+            "key": "mageia",
+            "class": "mageia"
+        },
+        {
+            "key": "Manjaro.i686",
+            "class": "Manjaro.i686"
+        },
+        {
+            "key": "manjaro",
+            "class": "manjaro"
+        },
+        {
+            "key": "Manjaro.x86_64",
+            "class": "Manjaro.x86_64"
+        },
+        {
+            "key": "Manjaro.x86_64",
+            "class": "Manjaro.x86_64"
+        },
+        {
+            "key": "sabayon",
+            "class": "sabayon"
+        },
+        {
+            "key": "siduction",
+            "class": "siduction"
+        },
+        {
+            "key": "steamos",
+            "class": "steamos"
+        },
+        {
+            "key": "void",
+            "class": "void"
+        },
+        {
+            "key": "xubuntu",
+            "class": "xubuntu"
+        },
+        {
             "key": "windows",
             "class": "windows"
         },
@@ -75,6 +183,18 @@
         {
             "key": "memtest",
             "class": "memtest"
+        },
+        {
+            "key": "bsd",
+            "class": "bsd"
+        },
+        {
+            "key": "driver",
+            "class": "driver"
+        },
+        {
+            "key": "efi",
+            "class": "efi"
         },
         {
             "key": "iso",
