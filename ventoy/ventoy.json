@@ -73,6 +73,10 @@
             "class": "windows"
         },
         {
+            "key": "clonezilla",
+            "class": "clonezilla"
+        },
+        {
             "key": "iso",
             "class": "iso"
         }
