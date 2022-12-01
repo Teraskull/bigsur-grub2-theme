@@ -65,12 +65,28 @@
             "class": "zorin-os"
         },
         {
+            "key": "win11",
+            "class": "win11"
+        },
+        {
+            "key": "winxp",
+            "class": "winxp"
+        },
+        {
+            "key": "winvista",
+            "class": "winvista"
+        },
+        {
             "key": "windows",
             "class": "windows"
         },
         {
             "key": "hirens",
             "class": "windows"
+        },
+        {
+            "key": "clonezilla",
+            "class": "clonezilla"
         },
         {
             "key": "iso",
