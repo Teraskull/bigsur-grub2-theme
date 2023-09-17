@@ -173,6 +173,10 @@
             "class": "xubuntu"
         },
         {
+            "key": "nix",
+            "class": "nix"
+        },
+        {
             "key": "win11",
             "class": "win11"
         },
