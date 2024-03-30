@@ -173,8 +173,8 @@
             "class": "xubuntu"
         },
         {
-            "key": "nix",
-            "class": "nix"
+            "key": "nixos",
+            "class": "nixos"
         },
         {
             "key": "win11",
