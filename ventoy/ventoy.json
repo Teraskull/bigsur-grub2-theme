@@ -21,6 +21,10 @@
             "class": "kubuntu"
         },
         {
+            "key": "AlmaLinux-",
+            "class": "AlmaLinux"
+        },
+        {
             "key": "ubuntu",
             "class": "ubuntu"
         },
@@ -151,6 +155,10 @@
         {
             "key": "Manjaro.x86_64",
             "class": "Manjaro.x86_64"
+        },
+        {
+            "key": "Rocky-",
+            "class": "Rocky"
         },
         {
             "key": "sabayon",
