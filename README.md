@@ -37,3 +37,6 @@ $ ./install.sh
 This software is available under the following licenses:
 
   * **MIT**
+  * Certain OS logos are taken from [Simple Icons](https://simpleicons.org/):
+    * RockyLinux
+    * AlmaLinux
